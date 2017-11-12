@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <!-- 数据源 -->
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url}"/>
+       <!--  <property name="url" value="${mycat.jdbc.url}"/> -->
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${cpool.initialSize}"/>
+        <!-- 连接池最大使用连接数量 -->
+        <property name="maxActive" value="${cpool.maxActive}"/>
+        <!-- 连接池最小空闲连接数 -->
+        <property name="minIdle" value="${cpool.minIdle}"/>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${cpool.maxWait}"/>
+        <property name="validationQuery" value="${cpool.validationQuery}"/>
+        <property name="testOnBorrow" value="${cpool.testOnBorrow}"/>
+        <property name="testOnReturn" value="${cpool.testOnReturn}"/>
+        <property name="testWhileIdle" value="${cpool.testWhileIdle}"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${cpool.timeBetweenEvictionRunsMillis}"/>
+        <!-- 打开removeAbandoned功能 -->
+        <property name="removeAbandoned" value="${cpool.removeAbandoned}"/>
+        <!-- 1800秒，也就是30分钟 -->
+        <property name="removeAbandonedTimeout" value="${cpool.removeAbandonedTimeout}"/>
+        <!-- 关闭abandoned连接时输出错误日志 -->
+        <property name="logAbandoned" value="${cpool.logAbandoned}"/>
+    </bean>
+
+    <!-- mybatis 的SqlSession的工厂: SqlSessionFactoryBean dataSource:引用数据源 -->
+    <bean id="abaoworldSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath*:mappers/*.xml"/>
+    </bean>
+
+    <!-- mybatis 自动扫描加载Sql映射接口 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.fz.abaoworld.dal.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="abaoworldSqlSessionFactory"/>
+    </bean>
+
+    <!-- 事务配置 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 打开事务注解 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>
