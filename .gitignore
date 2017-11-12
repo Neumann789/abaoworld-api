@@ -5,9 +5,7 @@
 .gradle
 build
 classes
-.classpath
 .settings/
-.project
 
 # Maven work
 target
