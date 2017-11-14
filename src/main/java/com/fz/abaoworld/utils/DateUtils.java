@@ -266,15 +266,15 @@ public class DateUtils {
         return false;
     }
 
-    public static void main(String[] args) {
-        /*try {
+/*    public static void main(String[] args) {
+        try {
             System.out.println(getBetweenDays("2017-07-27", "2017-08-01"));
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     	
     	String returnDate = dateFormat("2017-10-23", "yyyy-MM-dd", "yyyyMMddHHmm");
     	
     	System.out.println(returnDate);
-    }
+    }*/
 }
