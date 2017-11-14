@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
-	<property name="log.base" value="/var/logs/abaoworld" />
+	<property name="log.base" value="/var/logs" />
 	<property name="project.name" value="abaoworld" />
 	<property name="pattern"
 		value="%d{yyyy-MM-dd HH:mm:ss.SSS}  %-5level [%thread] %logger{80} :%msg%n" />
@@ -9,14 +9,14 @@
        <!-- 日志输出编码 -->  
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>${pattern}</pattern>
-        </layout>   
+        </layout>
     </appender>
 
     <appender name="root"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/${project.name}/payment-${project.name}-root.log</file>
+        <file>${log.base}/${project.name}/${project.name}-root.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/${project.name}/%d{yyyy-MM-dd}/payment-${project.name}-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/${project.name}/%d{yyyy-MM-dd}/${project.name}-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -30,14 +30,14 @@
     
     <appender name="ERROR"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/${project.name}/payment-${project.name}-error.log</file>
+        <file>${log.base}/${project.name}/${project.name}-error.log</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">  
             <level>ERROR</level>  
             <onMatch>ACCEPT</onMatch>  
             <onMismatch>DENY</onMismatch>  
         </filter>  
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/${project.name}/%d{yyyy-MM-dd}/payment-${project.name}-error-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/${project.name}/%d{yyyy-MM-dd}/${project.name}-error-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>

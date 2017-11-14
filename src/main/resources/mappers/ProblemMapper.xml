@@ -33,11 +33,9 @@
   </delete>
   <insert id="insert" parameterType="com.fz.abaoworld.dal.entity.ProblemEntity">
     insert into problem (id, member_id, pro_title, 
-      pro_type, pro_degree, create_time, 
-      modify_time, pro_content)
+      pro_type, pro_degree,  pro_content)
     values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=VARCHAR}, #{proTitle,jdbcType=VARCHAR}, 
-      #{proType,jdbcType=VARCHAR}, #{proDegree,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{modifyTime,jdbcType=TIMESTAMP}, #{proContent,jdbcType=LONGVARCHAR})
+      #{proType,jdbcType=VARCHAR}, #{proDegree,jdbcType=VARCHAR}, #{proContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.fz.abaoworld.dal.entity.ProblemEntity">
     insert into problem
