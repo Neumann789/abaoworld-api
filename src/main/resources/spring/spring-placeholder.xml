@@ -12,7 +12,9 @@
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:abaoworld.properties</value>
+                <!-- <value>classpath:abaoworld.properties</value> -->
+                <!-- <value>file:${abaoworld_path}/abaoworld.properties</value> -->
+                <value>file:/opt/config/abaoworld.properties</value>
             </list>
         </property>
         <!--<property name="ignoreUnresolvablePlaceholders" value="true" />-->
