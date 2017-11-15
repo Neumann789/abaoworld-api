@@ -5,6 +5,8 @@ public enum RspCodeEnum {
 	SUCCESS("0000","成功"),
 	FAIL("9999","失败"),
 	
+	B_SESSION_IS_INVALID("S9998", "session is  invalid"),
+	
 	;
 	
 	

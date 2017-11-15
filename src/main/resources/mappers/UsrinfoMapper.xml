@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fz.abaoworld.dal.dao.UsrInfoDao">
+
+<resultMap type="com.fz.abaoworld.dal.entity.UsrInfoEntity" id="usrInfo">
+		<result column="usr_id" jdbcType="VARCHAR" property="usrId" />
+		<result column="usr_name" jdbcType="VARCHAR" property="usrName" />
+		<result column="usr_pwd" jdbcType="VARCHAR" property="usrPwd" />
+		<result column="usr_phone" jdbcType="VARCHAR" property="usrPhone" />
+		<result column="usr_email" jdbcType="VARCHAR" property="usrEmail" />
+		<result column="usr_type" jdbcType="VARCHAR" property="usrType" />
+		<result column="usr_status" jdbcType="VARCHAR" property="usrStatus" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="create_time" jdbcType="DATE" property="createTime" />
+		<result column="modify_time" jdbcType="DATE" property="modifyTime" />
+</resultMap>
+
+	<insert id="insert" parameterType="com.fz.abaoworld.dal.entity.UsrInfoEntity">
+		<selectKey keyProperty="usrId" resultType="String"
+			order="BEFORE">
+			select replace(uuid(),'-','') from dual
+		</selectKey>
+		insert into usr_info (usr_id, usr_name,
+		usr_pwd,usr_phone,usr_email,usr_type,usr_status)
+		values (#{usrId,jdbcType=VARCHAR}, #{usrName,jdbcType=VARCHAR},
+		#{usrPwd,jdbcType=VARCHAR},#{usrPhone,jdbcType=VARCHAR},#{usrEmail,jdbcType=VARCHAR},#{usrType,jdbcType=VARCHAR},#{usrStatus,jdbcType=VARCHAR})
+	</insert>
+	      <select id="getUsrInfoByUsrName" parameterType="com.fz.abaoworld.dal.entity.UsrInfoEntity"  resultMap="usrInfo" >  
+                
+             select * from usr_info where usr_name = #{usrName}   
+              <if test="usrId != null and usrId != '' ">  
+              AND  usr_id !=#{usrId}
+               </if>   
+         
+   </select>   
+   	      <select id="getUsrInfoByUsrPhone" parameterType="com.fz.abaoworld.dal.entity.UsrInfoEntity"  resultMap="usrInfo" >    
+         
+       
+             select * from usr_info where usr_phone = #{usrPhone}   
+              <if test="usrId != null and usrId != '' ">  
+              AND  usr_id !=#{usrId}
+               </if>  
+         
+   
+   </select>   
+   	      <select id="getUsrInfoByUsrEmail" parameterType="com.fz.abaoworld.dal.entity.UsrInfoEntity" resultMap="usrInfo" >   
+              
+             select * from usr_info where usr_email = #{usrEmail}    
+          <if test="usrId != null and usrId != '' ">  
+              AND  usr_id !=#{usrId}
+               </if>  
+   </select>
+         <select id="getUsrInfoByUsrNameOrByPhone"  resultMap="usrInfo" >    
+         <![CDATA[        
+             select * from usr_info where  (usr_name = #{name}  or usr_phone = #{name}  or usr_email = #{name} )  and usr_pwd=#{pwd}
+         ]]>    
+   </select>   
+	<update id="updateMember" parameterType="com.fz.abaoworld.dal.entity.UsrInfoEntity">
+	update usr_info set  usr_name=#{usrName},usr_phone=#{usrPhone},usr_email=#{usrEmail},usr_status=#{usrStatus} where usr_id =#{usrId}
+	</update>
+</mapper>

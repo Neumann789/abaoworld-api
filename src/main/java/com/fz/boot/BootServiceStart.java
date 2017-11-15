@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 
+import com.fz.abaoworld.filter.MemberLoginFilter;
 import com.fz.abaoworld.filter.WebFilter;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
@@ -48,6 +49,11 @@ public class BootServiceStart implements EmbeddedServletContainerCustomizer{
 		
 		return new WebFilter();
 		
+	}
+	
+	@Bean
+	public MemberLoginFilter memberLoginFilter() {
+		return new MemberLoginFilter();
 	}
 	
 }

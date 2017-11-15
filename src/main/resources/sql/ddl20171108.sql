@@ -8,3 +8,16 @@ create table problem(
   create_time timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   modify_time timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '修改时间'
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='问题表';
+
+CREATE TABLE `usr_info` (
+  `usr_id` varchar(64) DEFAULT NULL,
+  `usr_name` varchar(300) DEFAULT NULL,
+  `usr_pwd` varchar(300) DEFAULT NULL,
+  `usr_phone` varchar(300) DEFAULT NULL,
+  `usr_email` varchar(300) DEFAULT NULL,
+  `usr_type` varchar(8) DEFAULT NULL,
+  `usr_status` varchar(8) DEFAULT NULL,
+  `remark` varchar(200) DEFAULT NULL,
+  `create_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+  `modify_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '修改时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
