@@ -14,10 +14,13 @@ import com.alibaba.fastjson.JSON;
 import com.fz.abaoworld.common.BaseRsp;
 import com.fz.abaoworld.common.RspCodeEnum;
 import com.fz.abaoworld.dal.dao.ProblemDao;
+import com.fz.abaoworld.dal.dao.TagDao;
 import com.fz.abaoworld.dal.entity.ProblemEntity;
+import com.fz.abaoworld.dal.entity.TagEntity;
 import com.fz.abaoworld.service.ProblemService;
 import com.fz.abaoworld.service.dto.req.ProblemDTO;
 import com.fz.abaoworld.service.dto.req.QueryProListDTO;
+import com.fz.abaoworld.service.dto.rsp.PageRsp;
 import com.fz.abaoworld.service.dto.rsp.QueryProListRsp;
 
 @Service
@@ -28,6 +31,9 @@ public class ProblemServiceImpl implements ProblemService{
 	
 	@Autowired
 	private ProblemDao problemDao;
+	
+	@Autowired
+	private TagDao tagDao;
 	
 	/**
 	 * 
@@ -94,6 +100,7 @@ public class ProblemServiceImpl implements ProblemService{
 			queryProListRsp.setProlist(list);
 			queryProListRsp.setTotal(total);
 		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
 			return BaseRsp.returnFail();
 		}
 		
@@ -117,11 +124,35 @@ public class ProblemServiceImpl implements ProblemService{
 				baseRsp.setBody(entity);
 			}
 		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
 			return BaseRsp.returnFail();
 		}
 		
 		return baseRsp;
 	}
+	
+
+
+	@Override
+	public BaseRsp<PageRsp<TagEntity>> queryAllTags() {
+		logger.info("标签列表查询");
+		BaseRsp<PageRsp<TagEntity>>  baseRsp = new BaseRsp<>(RspCodeEnum.SUCCESS); 
+		PageRsp<TagEntity> pageRsp = new PageRsp<TagEntity>();
+		baseRsp.setBody(pageRsp);
+		try {
+			List<TagEntity> list = tagDao.selectAllTags();
+			int total = tagDao.selectAllTagsTotal();
+			pageRsp.setList(list);
+			pageRsp.setTotal(total);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return BaseRsp.returnFail();
+		}
+		
+		return baseRsp;
+	}
+	
+	
 	
 	
 	private ProblemEntity dto2Entity(ProblemDTO dto){
@@ -131,6 +162,7 @@ public class ProblemServiceImpl implements ProblemService{
 		record.setProDegree(dto.getProDegree());
 		record.setProType(dto.getProType());
 		record.setProContent(dto.getProContent());
+		record.setTagList(dto.getTagList());
 		return record;
 	}
 

@@ -21,3 +21,6 @@ CREATE TABLE `usr_info` (
   `create_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `modify_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '修改时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+alter table problem add source VARCHAR(40) DEFAULT 'native' COMMENT '问题来源';
+alter table problem add tag_list VARCHAR(200) DEFAULT '' COMMENT '标签集,以逗号分割';

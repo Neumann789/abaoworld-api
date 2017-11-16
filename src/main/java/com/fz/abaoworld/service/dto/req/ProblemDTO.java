@@ -13,6 +13,8 @@ public class ProblemDTO {
     private String proDegree;
 
     private String proContent;
+    
+    private String tagList;
 
     public String getMemberId() {
         return memberId;
@@ -53,5 +55,15 @@ public class ProblemDTO {
     public void setProContent(String proContent) {
         this.proContent = proContent == null ? null : proContent.trim();
     }
+
+	public String getTagList() {
+		return tagList;
+	}
+
+	public void setTagList(String tagList) {
+		this.tagList = tagList;
+	}
+    
+    
 
 }

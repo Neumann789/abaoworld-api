@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fz.abaoworld.common.BaseRsp;
 import com.fz.abaoworld.dal.entity.ProblemEntity;
+import com.fz.abaoworld.dal.entity.TagEntity;
 import com.fz.abaoworld.service.ProblemService;
 import com.fz.abaoworld.service.dto.req.ProblemDTO;
 import com.fz.abaoworld.service.dto.req.QueryProListDTO;
+import com.fz.abaoworld.service.dto.rsp.PageRsp;
 import com.fz.abaoworld.utils.DateUtils;
 
 @Controller
@@ -45,12 +47,14 @@ public class ProblemController extends BaseContoller{
 	public BaseRsp addPro(HttpServletRequest request,HttpServletResponse response){
 		String proTitle = request.getParameter("proTitle");
 		String proContent = request.getParameter("proContent");
+		String tagList = request.getParameter("tagList");
 		ProblemDTO dto = new ProblemDTO();
 		dto.setMemberId("test002");
 		dto.setProDegree("A");
 		dto.setProType("tech");
 		dto.setProTitle(proTitle);
 		dto.setProContent(proContent);
+		dto.setTagList(tagList);
 		return problemService.addPro(dto);
 	}
 	
@@ -96,5 +100,12 @@ public class ProblemController extends BaseContoller{
 		
 		return problemService.queryProById(proId);
 	}
+	
+	@RequestMapping(value="/problem/queryAllTags")
+	@ResponseBody
+	public BaseRsp<PageRsp<TagEntity>> queryAllTags(HttpServletRequest request){
+		return problemService.queryAllTags();
+	}
+
 
 }

@@ -18,6 +18,16 @@ public class ProblemEntity {
     private Date modifyTime;
 
     private String proContent;
+    
+    /**
+     * 问题来源
+     */
+    private String source;
+    
+    /**
+     * 标签集
+     */
+    private String tagList;
 
     public Long getId() {
         return id;
@@ -82,4 +92,21 @@ public class ProblemEntity {
     public void setProContent(String proContent) {
         this.proContent = proContent == null ? null : proContent.trim();
     }
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getTagList() {
+		return tagList;
+	}
+
+	public void setTagList(String tagList) {
+		this.tagList = tagList;
+	}
+    
 }

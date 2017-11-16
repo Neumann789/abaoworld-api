@@ -9,6 +9,8 @@
     <result column="pro_degree" jdbcType="VARCHAR" property="proDegree" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+     <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="tag_list" jdbcType="VARCHAR" property="tagList" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fz.abaoworld.dal.entity.ProblemEntity">
     <result column="pro_content" jdbcType="LONGVARCHAR" property="proContent" />
@@ -33,103 +35,13 @@
   </delete>
   <insert id="insert" parameterType="com.fz.abaoworld.dal.entity.ProblemEntity">
     insert into problem (id, member_id, pro_title, 
-      pro_type, pro_degree,  pro_content)
+      pro_type, pro_degree,  pro_content,source,tag_list)
     values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=VARCHAR}, #{proTitle,jdbcType=VARCHAR}, 
-      #{proType,jdbcType=VARCHAR}, #{proDegree,jdbcType=VARCHAR}, #{proContent,jdbcType=LONGVARCHAR})
+      #{proType,jdbcType=VARCHAR}, #{proDegree,jdbcType=VARCHAR}, #{proContent,jdbcType=LONGVARCHAR}
+      , #{source,jdbcType=VARCHAR}, #{tagList,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.fz.abaoworld.dal.entity.ProblemEntity">
-    insert into problem
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="memberId != null">
-        member_id,
-      </if>
-      <if test="proTitle != null">
-        pro_title,
-      </if>
-      <if test="proType != null">
-        pro_type,
-      </if>
-      <if test="proDegree != null">
-        pro_degree,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="modifyTime != null">
-        modify_time,
-      </if>
-      <if test="proContent != null">
-        pro_content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="memberId != null">
-        #{memberId,jdbcType=VARCHAR},
-      </if>
-      <if test="proTitle != null">
-        #{proTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="proType != null">
-        #{proType,jdbcType=VARCHAR},
-      </if>
-      <if test="proDegree != null">
-        #{proDegree,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyTime != null">
-        #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="proContent != null">
-        #{proContent,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fz.abaoworld.dal.entity.ProblemEntity">
-    update problem
-    <set>
-      <if test="memberId != null">
-        member_id = #{memberId,jdbcType=VARCHAR},
-      </if>
-      <if test="proTitle != null">
-        pro_title = #{proTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="proType != null">
-        pro_type = #{proType,jdbcType=VARCHAR},
-      </if>
-      <if test="proDegree != null">
-        pro_degree = #{proDegree,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyTime != null">
-        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="proContent != null">
-        pro_content = #{proContent,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fz.abaoworld.dal.entity.ProblemEntity">
-    update problem
-    set member_id = #{memberId,jdbcType=VARCHAR},
-      pro_title = #{proTitle,jdbcType=VARCHAR},
-      pro_type = #{proType,jdbcType=VARCHAR},
-      pro_degree = #{proDegree,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
-      pro_content = #{proContent,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+ 
+  
   <update id="updateByPrimaryKey" parameterType="com.fz.abaoworld.dal.entity.ProblemEntity">
     update problem
     set member_id = #{memberId,jdbcType=VARCHAR},
