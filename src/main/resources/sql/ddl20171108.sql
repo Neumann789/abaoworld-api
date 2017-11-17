@@ -24,3 +24,13 @@ CREATE TABLE `usr_info` (
 
 alter table problem add source VARCHAR(40) DEFAULT 'native' COMMENT '问题来源';
 alter table problem add tag_list VARCHAR(200) DEFAULT '' COMMENT '标签集,以逗号分割';
+
+CREATE TABLE `tag` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '标签ID',
+  `tag_name` varchar(32) NOT NULL COMMENT '标签名',
+  `remark` varchar(500) NOT NULL COMMENT '备注',
+  `priority` int(8) NOT NULL DEFAULT '0',
+  `create_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+  `modify_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='标签表';

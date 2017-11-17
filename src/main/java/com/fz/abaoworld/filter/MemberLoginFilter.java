@@ -42,7 +42,7 @@ public class MemberLoginFilter implements Filter {
 			// 无session信息
 			if (sessionObj == null) {
 				BaseRsp res = new BaseRsp(RspCodeEnum.B_SESSION_IS_INVALID);
-				resp.getOutputStream().print(JSON.toJSONString(res));
+				resp.getOutputStream().print(JSON.toJSONString(res));//TODO 前端获取数据有问题 需要优化
 			} else {
 				chain.doFilter(req, resp);
 			}
