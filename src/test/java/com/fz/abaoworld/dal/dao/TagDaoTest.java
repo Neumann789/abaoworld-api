@@ -33,5 +33,11 @@ public class TagDaoTest extends BaseDaoTest{
 		int result = tagDao.selectAllTagsTotal();
 		logger.info("返回结果:{}",result);
 	}
+	
+	@Test
+	public void selectTagByIds(){
+		List<TagEntity> result = tagDao.selectTagByIds("1,2");
+		logger.info("返回结果:{}",result);
+	}
 
 }

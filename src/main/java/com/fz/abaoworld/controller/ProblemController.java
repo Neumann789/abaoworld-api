@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fz.abaoworld.common.BaseRsp;
+import com.fz.abaoworld.common.SessionUtils;
 import com.fz.abaoworld.dal.entity.ProblemEntity;
 import com.fz.abaoworld.dal.entity.TagEntity;
 import com.fz.abaoworld.service.ProblemService;
@@ -47,14 +48,14 @@ public class ProblemController extends BaseContoller{
 	public BaseRsp addPro(HttpServletRequest request,HttpServletResponse response){
 		String proTitle = request.getParameter("proTitle");
 		String proContent = request.getParameter("proContent");
-		String tagList = request.getParameter("tagList");
+		String tagIds = request.getParameter("tagIds");
 		ProblemDTO dto = new ProblemDTO();
-		dto.setMemberId("test002");
+		dto.setMemberId(SessionUtils.getUsrInfo().getUsrId());
 		dto.setProDegree("A");
 		dto.setProType("tech");
 		dto.setProTitle(proTitle);
 		dto.setProContent(proContent);
-		dto.setTagList(tagList);
+		dto.setTagIds(tagIds);
 		return problemService.addPro(dto);
 	}
 	

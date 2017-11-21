@@ -14,7 +14,7 @@ public class ProblemDTO {
 
     private String proContent;
     
-    private String tagList;
+    private String tagIds;
 
     public String getMemberId() {
         return memberId;
@@ -56,13 +56,15 @@ public class ProblemDTO {
         this.proContent = proContent == null ? null : proContent.trim();
     }
 
-	public String getTagList() {
-		return tagList;
+	public String getTagIds() {
+		return tagIds;
 	}
 
-	public void setTagList(String tagList) {
-		this.tagList = tagList;
+	public void setTagIds(String tagIds) {
+		this.tagIds = tagIds;
 	}
+
+
     
     
 

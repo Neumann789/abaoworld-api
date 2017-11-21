@@ -34,3 +34,8 @@ CREATE TABLE `tag` (
   `modify_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='标签表';
+
+alter table problem add visit_count BIGINT DEFAULT 0 COMMENT '浏览数';
+alter table problem add agree_count BIGINT DEFAULT 0 COMMENT '点赞数';
+alter table problem add pro_status varchar(100) default 'w_handle' comment '状态: w_handle-待处理,p_handle-处理中,handled-已处理';
+alter table problem add pro_point BIGINT DEFAULT 0 COMMENT '问题积分数';

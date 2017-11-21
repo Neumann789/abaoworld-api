@@ -1,6 +1,7 @@
 package com.fz.abaoworld.dal.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class ProblemEntity {
     private Long id;
@@ -27,7 +28,29 @@ public class ProblemEntity {
     /**
      * 标签集
      */
-    private String tagList;
+    private String tagIds;
+    
+    private List<TagEntity> tagList;
+    
+    /**
+     * 浏览次数
+     */
+    private Long visitCount;
+    
+    /**
+     * 点赞数
+     */
+    private Long agreeCount;
+    
+    /**
+     * 问题状态
+     */
+    private String proStatus;
+    
+    /**
+     * 积分数
+     */
+    private Long proPoint;
 
     public Long getId() {
         return id;
@@ -101,12 +124,54 @@ public class ProblemEntity {
 		this.source = source;
 	}
 
-	public String getTagList() {
+	public String getTagIds() {
+		return tagIds;
+	}
+
+	public void setTagIds(String tagIds) {
+		this.tagIds = tagIds;
+	}
+
+	public List<TagEntity> getTagList() {
 		return tagList;
 	}
 
-	public void setTagList(String tagList) {
+	public void setTagList(List<TagEntity> tagList) {
 		this.tagList = tagList;
 	}
+
+	public Long getVisitCount() {
+		return visitCount;
+	}
+
+	public void setVisitCount(Long visitCount) {
+		this.visitCount = visitCount;
+	}
+
+	public Long getAgreeCount() {
+		return agreeCount;
+	}
+
+	public void setAgreeCount(Long agreeCount) {
+		this.agreeCount = agreeCount;
+	}
+
+	public String getProStatus() {
+		return proStatus;
+	}
+
+	public void setProStatus(String proStatus) {
+		this.proStatus = proStatus;
+	}
+
+	public Long getProPoint() {
+		return proPoint;
+	}
+
+	public void setProPoint(Long proPoint) {
+		this.proPoint = proPoint;
+	}
+
+	
     
 }

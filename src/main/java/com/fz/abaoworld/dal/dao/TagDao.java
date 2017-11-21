@@ -2,6 +2,8 @@ package com.fz.abaoworld.dal.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.fz.abaoworld.dal.entity.TagEntity;
 
 public interface TagDao {
@@ -21,4 +23,6 @@ public interface TagDao {
     List<TagEntity> selectAllTags();
     
     int selectAllTagsTotal();
+    
+    List<TagEntity> selectTagByIds(@Param("ids")String ids);
 }

@@ -9,9 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.fz.abaoworld.common.BaseRsp;
+import com.fz.abaoworld.common.CommonEnum;
 import com.fz.abaoworld.common.RspCodeEnum;
 import com.fz.abaoworld.dal.dao.ProblemDao;
 import com.fz.abaoworld.dal.dao.TagDao;
@@ -118,8 +120,21 @@ public class ProblemServiceImpl implements ProblemService{
 		logger.info("请求参数：proId={}",proId);
 		BaseRsp<ProblemEntity> baseRsp = new BaseRsp<>(RspCodeEnum.SUCCESS); 
 		ProblemEntity entity = null;
+		List<TagEntity> tagList = null;
 		try {
 			entity = problemDao.selectByPrimaryKey(proId);
+			if(!StringUtils.isEmpty(entity.getTagIds())){
+				tagList = tagDao.selectTagByIds(entity.getTagIds());
+				entity.setTagList(tagList);
+			}
+			if(!StringUtils.isEmpty(entity.getSource())){
+				entity.setSource(
+						CommonEnum.SOURCE_NATIVE.getName().equals(entity.getSource())?
+								CommonEnum.SOURCE_NATIVE.getDesc():entity.getSource()
+						);
+			}else{
+				entity.setSource("");
+			}
 			if(entity!=null){
 				baseRsp.setBody(entity);
 			}
@@ -157,12 +172,17 @@ public class ProblemServiceImpl implements ProblemService{
 	
 	private ProblemEntity dto2Entity(ProblemDTO dto){
 		ProblemEntity record = new ProblemEntity();
-		record.setMemberId("test001");
+		record.setMemberId(dto.getMemberId());
 		record.setProTitle(dto.getProTitle());
 		record.setProDegree(dto.getProDegree());
 		record.setProType(dto.getProType());
 		record.setProContent(dto.getProContent());
-		record.setTagList(dto.getTagList());
+		record.setTagIds(dto.getTagIds());
+		record.setSource(CommonEnum.SOURCE_NATIVE.getName());
+		record.setProStatus(CommonEnum.PRO_W_HANDLE.getName());
+		record.setAgreeCount(0L);
+		record.setVisitCount(0L);
+		record.setProPoint(0L);
 		return record;
 	}
 

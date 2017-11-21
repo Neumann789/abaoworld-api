@@ -117,4 +117,12 @@
     from tag
     
   </select>
+  
+    <select id="selectTagByIds" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tag
+    where id in (${ids})
+  </select>
+  
 </mapper>
