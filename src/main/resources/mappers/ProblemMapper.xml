@@ -14,14 +14,16 @@
     <result column="visit_count" jdbcType="BIGINT" property="visitCount" />
     <result column="agree_count" jdbcType="BIGINT" property="agreeCount" />
     <result column="pro_status" jdbcType="VARCHAR" property="proStatus" />
+    <result column="comment_count" jdbcType="BIGINT" property="commentCount" />
     <result column="pro_point" jdbcType="BIGINT" property="proPoint" />
+    
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fz.abaoworld.dal.entity.ProblemEntity">
     <result column="pro_content" jdbcType="LONGVARCHAR" property="proContent" />
   </resultMap>
   <sql id="Base_Column_List">
     id, member_id, pro_title, pro_type, pro_degree, create_time, modify_time,source,tag_ids,
-    visit_count,agree_count,pro_status,pro_point
+    visit_count,agree_count,comment_count,pro_status,pro_point
   </sql>
   <sql id="Blob_Column_List">
     pro_content
@@ -56,6 +58,18 @@
       pro_degree = #{proDegree,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <update id="incrVisitCount" parameterType="java.lang.Long">
+    update problem
+    set visit_count = visit_count+1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="incrAgreeCount" parameterType="java.lang.Long">
+    update problem
+    set agree_count = agree_count+1
     where id = #{id,jdbcType=BIGINT}
   </update>
   

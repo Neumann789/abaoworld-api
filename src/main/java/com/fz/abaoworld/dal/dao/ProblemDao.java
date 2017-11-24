@@ -23,4 +23,8 @@ public interface ProblemDao {
     List<ProblemEntity> queryProList(Map<String,Object> queryMap);
     
     int queryProListTotalCount(Map<String,Object> queryMap);
+    
+    int incrVisitCount(Long id);
+    
+    int incrAgreeCount(Long id);
 }

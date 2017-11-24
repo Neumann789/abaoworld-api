@@ -35,7 +35,9 @@ CREATE TABLE `tag` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='标签表';
 
+alter table problem change tag_list tag_ids VARCHAR(200) DEFAULT '' COMMENT '标签集,以逗号分割';
 alter table problem add visit_count BIGINT DEFAULT 0 COMMENT '浏览数';
 alter table problem add agree_count BIGINT DEFAULT 0 COMMENT '点赞数';
 alter table problem add pro_status varchar(100) default 'w_handle' comment '状态: w_handle-待处理,p_handle-处理中,handled-已处理';
 alter table problem add pro_point BIGINT DEFAULT 0 COMMENT '问题积分数';
+alter table problem add comment_count BIGINT DEFAULT 0 COMMENT '评论数';

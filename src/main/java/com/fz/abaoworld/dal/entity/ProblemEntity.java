@@ -43,6 +43,11 @@ public class ProblemEntity {
     private Long agreeCount;
     
     /**
+     * 评论数
+     */
+    private Long commentCount;
+    
+    /**
      * 问题状态
      */
     private String proStatus;
@@ -170,6 +175,14 @@ public class ProblemEntity {
 
 	public void setProPoint(Long proPoint) {
 		this.proPoint = proPoint;
+	}
+
+	public Long getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(Long commentCount) {
+		this.commentCount = commentCount;
 	}
 
 	

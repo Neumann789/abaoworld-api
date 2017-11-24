@@ -122,6 +122,7 @@ public class ProblemServiceImpl implements ProblemService{
 		ProblemEntity entity = null;
 		List<TagEntity> tagList = null;
 		try {
+			
 			entity = problemDao.selectByPrimaryKey(proId);
 			if(!StringUtils.isEmpty(entity.getTagIds())){
 				tagList = tagDao.selectTagByIds(entity.getTagIds());
@@ -138,6 +139,7 @@ public class ProblemServiceImpl implements ProblemService{
 			if(entity!=null){
 				baseRsp.setBody(entity);
 			}
+			problemDao.incrVisitCount(proId);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return BaseRsp.returnFail();
