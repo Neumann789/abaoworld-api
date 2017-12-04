@@ -27,4 +27,9 @@ public interface ProblemDao {
     int incrVisitCount(Long id);
     
     int incrAgreeCount(Long id);
+    
+    List<ProblemEntity> queryProListByKey(String key);
+    
+    int queryProListByKeyTotal(String key);
+    
 }

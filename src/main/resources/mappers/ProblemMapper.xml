@@ -152,5 +152,43 @@
 	]]>
 
   </select>
-  
+    <!-- 查询交易流水列表 -->
+  <select id="queryProList" parameterType="map" resultMap="ResultMapWithBLOBs">
+  	SELECT
+		*
+	FROM
+		problem
+	WHERE
+		1 = 1
+	<if test="proId != null">
+		AND	id = #{proId}
+	</if>
+	<if test="proType != null">
+	 and pro_type = #{proType}
+	</if>
+	<if test="proTitle != null">
+	 and pro_title like CONCAT('%',#{proTitle},'%' ) 
+	</if>
+	<if test="proContent != null">
+	 and pro_content like CONCAT('%',#{proContent},'%' ) 
+	</if>
+	<if test="memberId != null">
+	 and member_id = #{memberId}
+	</if>
+	<if test="proDegree != null">
+	 and pro_degree = #{proDegree}
+	</if>
+	<![CDATA[
+	and DATE_FORMAT(
+		create_time,
+		'%Y%m%d%H%i%s'
+	) >= #{startTime}
+	
+	and DATE_FORMAT(
+		create_time,
+		'%Y%m%d%H%i%s'
+	) <= #{endTime}
+	]]>
+	order by create_time desc limit #{start}, #{end}
+  </select>
 </mapper>
