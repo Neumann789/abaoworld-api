@@ -169,6 +169,24 @@ public class ProblemServiceImpl implements ProblemService{
 		return baseRsp;
 	}
 	
+	public BaseRsp modifyPro(ProblemDTO dto) {
+		logger.info("问题修改");
+		BaseRsp  baseRsp = new BaseRsp(RspCodeEnum.SUCCESS); 
+		try {
+			ProblemEntity record = new ProblemEntity();
+			record.setId(Long.parseLong(dto.getProId()));
+			record.setProTitle(dto.getProTitle());
+			record.setProContent(dto.getProContent());
+			record.setTagIds(dto.getTagIds());
+			problemDao.updateProByProId(record);
+		} catch (Exception e) {
+			logger.error("问题修改异常:"+e.getMessage(), e);
+			return BaseRsp.returnFail();
+		}
+		
+		return baseRsp;
+	}
+	
 	
 	
 	

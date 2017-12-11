@@ -17,5 +17,7 @@ public interface ProblemService {
 	public BaseRsp<ProblemEntity> queryProById(Long proId);
 	
 	public BaseRsp<PageRsp<TagEntity>> queryAllTags();
+	
+	public BaseRsp modifyPro(ProblemDTO dto);
 
 }

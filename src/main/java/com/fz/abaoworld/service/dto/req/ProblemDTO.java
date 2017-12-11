@@ -15,6 +15,8 @@ public class ProblemDTO {
     private String proContent;
     
     private String tagIds;
+    
+    private String proId;
 
     public String getMemberId() {
         return memberId;
@@ -62,6 +64,14 @@ public class ProblemDTO {
 
 	public void setTagIds(String tagIds) {
 		this.tagIds = tagIds;
+	}
+
+	public String getProId() {
+		return proId;
+	}
+
+	public void setProId(String proId) {
+		this.proId = proId;
 	}
 
 

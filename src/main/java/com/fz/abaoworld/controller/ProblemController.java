@@ -107,6 +107,22 @@ public class ProblemController extends BaseContoller{
 	public BaseRsp<PageRsp<TagEntity>> queryAllTags(HttpServletRequest request){
 		return problemService.queryAllTags();
 	}
+	
+	@RequestMapping(value="/problem/modifyPro")
+	@ResponseBody
+	public BaseRsp modifyPro(HttpServletRequest request){
+		String proTitle = request.getParameter("proTitle");
+		String proContent = request.getParameter("proContent");
+		String tagIds = request.getParameter("tagIds");
+		String proId = request.getParameter("proId");
+		ProblemDTO dto = new ProblemDTO();
+		dto.setMemberId(SessionUtils.getUsrInfo().getUsrId());
+		dto.setProTitle(proTitle);
+		dto.setProContent(proContent);
+		dto.setTagIds(tagIds);
+		dto.setProId(proId);
+		return problemService.modifyPro(dto);
+	}
 
 
 }

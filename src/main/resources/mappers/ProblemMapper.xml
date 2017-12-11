@@ -110,7 +110,7 @@
 		'%Y%m%d%H%i%s'
 	) <= #{endTime}
 	]]>
-	order by create_time desc limit #{start}, #{end}
+	order by modify_time desc limit #{start}, #{end}
   </select>
   
    <!-- 查询交易流水列表 -->
@@ -153,7 +153,7 @@
 
   </select>
     <!-- 查询交易流水列表 -->
-  <select id="queryProList" parameterType="map" resultMap="ResultMapWithBLOBs">
+  <select id="queryProList2" parameterType="map" resultMap="ResultMapWithBLOBs">
   	SELECT
 		*
 	FROM
@@ -189,6 +189,15 @@
 		'%Y%m%d%H%i%s'
 	) <= #{endTime}
 	]]>
-	order by create_time desc limit #{start}, #{end}
+	order by modify_time desc limit #{start}, #{end}
   </select>
+  
+    <update id="updateProByProId" parameterType="com.fz.abaoworld.dal.entity.ProblemEntity">
+    update problem
+      set 
+      pro_title = #{proTitle,jdbcType=VARCHAR},
+      pro_content = #{proContent,jdbcType=LONGVARCHAR},
+      tag_ids = #{tagIds,jdbcType=VARCHAR}
+      where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>

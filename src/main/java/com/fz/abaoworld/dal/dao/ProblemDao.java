@@ -32,4 +32,6 @@ public interface ProblemDao {
     
     int queryProListByKeyTotal(String key);
     
+    int updateProByProId(ProblemEntity record);
+    
 }
